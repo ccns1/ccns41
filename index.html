@@ -76,7 +76,7 @@ footer {
 document.addEventListener('DOMContentLoaded', () => {
   const socket = window.io();
   let rtcPeerConnection;
-  let remoteStream;  // 2人目の相手の接続を受け取らないようにするため、1人目の接続で受け取った Stream を保持しておく
+///  let remoteStream;  // 2人目の相手の接続を受け取らないようにするため、1人目の接続で受け取った Stream を保持しておく
   
   socket
     .on('connect', () => {
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const localStream = await getUserMedia();
       createRtcPeerConnection(localStream);
-      const sessionDescription = await rtcPeerConnection.createOffer(offerToReceiveVideo: true);
+      const sessionDescription = await rtcPeerConnection.createOffer();
       await rtcPeerConnection.setLocalDescription(sessionDescription);
       // Socket を経由して Offer SDP を送る
       socket.emit('message', JSON.stringify({ sdp: rtcPeerConnection.localDescription }));
