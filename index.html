@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const localStream = await getUserMedia();
       createRtcPeerConnection(localStream);
-      const sessionDescription = await rtcPeerConnection.createOffer();
+      const sessionDescription = await rtcPeerConnection.createOffer(offerToReceiveVideo: true);
       await rtcPeerConnection.setLocalDescription(sessionDescription);
       // Socket を経由して Offer SDP を送る
       socket.emit('message', JSON.stringify({ sdp: rtcPeerConnection.localDescription }));
