@@ -76,7 +76,7 @@ footer {
 document.addEventListener('DOMContentLoaded', () => {
   const socket = window.io();
   let rtcPeerConnection;
-///  let remoteStream;  // 2人目の相手の接続を受け取らないようにするため、1人目の接続で受け取った Stream を保持しておく
+  let remoteStream;  // 2人目の相手の接続を受け取らないようにするため、1人目の接続で受け取った Stream を保持しておく
   
   socket
     .on('connect', () => {
