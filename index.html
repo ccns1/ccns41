@@ -171,7 +171,15 @@ document.addEventListener('DOMContentLoaded', () => {
         rtcPeerConnection.close();
         rtcPeerConnection = null;
       }
-
+      if(document.getElementById('remote-video').srcObject) {
+        try {
+          document.getElementById('remote-video').srcObject.getTracks().forEach((track) => { track.stop(); });
+          document.getElementById('remote-video').srcObject = null;
+        }
+        catch(error) {
+          console.warn('Failed To Stop Remote Video', error);
+        }
+      }
       remoteStream = null;
       document.getElementById('start-button').disabled = false;
       document.getElementById('stop-button' ).disabled = true;
@@ -263,9 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </header>
 <main>
   <video id="local-video"  playsinline muted autoplay></video>
+
 </main>
 <footer>
-2020
+  Author : <a href="https://github.com/Neos21/webrtc-video-chat">Neo</a>
 </footer>
 
   </body>
